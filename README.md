@@ -10,9 +10,9 @@ Fréquentation des gares CFF
 - Florian Salvi
 
 ## Jeux de données
-[Nombre d’usagers de la gare CFF](uhttps://opendata.swiss/fr/dataset/anzahl-sbb-bahnhofbenutzerrl)
-[Collaboratrices et collaborateurs des CFF par canton de travail](https://opendata.swiss/fr/dataset/sbb-mitarbeitende-nach-arbeitskanton)
-[Halte: services accessoires](https://opendata.swiss/fr/dataset/haltestelle-nebenbetriebe)
+[Nombre d’usagers de la gare CFF](https://opendata.swiss/fr/dataset/anzahl-sbb-bahnhofbenutzer)\
+[Collaboratrices et collaborateurs des CFF par canton de travail](https://opendata.swiss/fr/dataset/sbb-mitarbeitende-nach-arbeitskanton)\
+[Halte: services accessoires](https://opendata.swiss/fr/dataset/haltestelle-nebenbetriebe)\
 [Demographic balance by canton](https://www.pxweb.bfs.admin.ch/pxweb/en/px-x-0102020000_101/px-x-0102020000_101/px-x-0102020000_101.px/table/tableViewLayout2/)
 
 ## Introduction
