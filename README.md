@@ -47,4 +47,4 @@ Nous pensons que les données provenant des Chemin de Fer Fédéraux Suisses son
 Les données démographiques de l'OFS peuvent être utilisées dans un large pannel de domaines : l'étude démogrpahique ; le domaine social ; les transports ; la recherche scientifique ; etc …
 
 ## Maquette
-[Maquette Figma](https://www.figma.com/design/N6wiZn5oJkOCLBWRyYposF/VisualDon?node-id=0-1&t=MAPyvtgjGijL998Q-1)\
+[Maquette Figma](https://www.figma.com/design/N6wiZn5oJkOCLBWRyYposF/VisualDon?node-id=0-1&t=MAPyvtgjGijL998Q-1)
