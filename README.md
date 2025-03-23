@@ -45,3 +45,6 @@ Nous n'avons pas pu trouver de références quant à l'utilisation de ces donné
 Nous pensons que les données provenant des Chemin de Fer Fédéraux Suisses sont utilisées par les CFF et les commerçants des gares pour effectuer des statistiques de fréquentations et dans un but de développement de leurs infrastrcutures.
 
 Les données démographiques de l'OFS peuvent être utilisées dans un large pannel de domaines : l'étude démogrpahique ; le domaine social ; les transports ; la recherche scientifique ; etc …
+
+## Maquette
+[Maquette Figma](https://www.figma.com/design/N6wiZn5oJkOCLBWRyYposF/VisualDon?node-id=0-1&t=MAPyvtgjGijL998Q-1)\
