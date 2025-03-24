@@ -1,79 +1,69 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  --clr-accent: #D72E20;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  --clr-primary-bg: #fafafa;
+  --clr-primary-txt: #111111;
+  --clr-secondary-bg: #111111;
+  --clr-secondary-txt: #fafafa;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --clr-white: #ffffff;
+
+  --txt-font-display: Arial, Helvetica, sans-serif;
+  --txt-font-txt: Arial, Helvetica, sans-serif;
+  --txt-weight-display: 900;
+  --txt-weight-txt: 400;
+
+  --txt-size-h1: 8rem;
+  --txt-size-h2: 2.5rem;
+  --txt-size-p: 1rem
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
+* {
+  box-sizing: border-box;
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  padding: 0;
+  text-decoration: none;
+  list-style: none;
+  font-size: 16px;
+}
+
+::selection {
+  background-color: var(--clr-accent); /* Couleur de fond */
+  color: var(--clr-primary-bg); /* Couleur du texte */
+}
+
+section {
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--clr-accent);
+
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 32px;
+
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  font-family: var(--txt-font-display);
+  font-size: var(--txt-size-h1);
+  font-weight: var(--txt-weight-display);
+  color: var(--clr-secondary-txt);
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+h2 {
+  font-family: var(--txt-font-display);
+  font-size: var(--txt-size-h2);
+  font-weight: var(--txt-weight-display);
+  color: var(--clr-primary-txt);
 }
 
-.card {
-  padding: 2em;
+p {
+  font-family: var(--txt-font-txt);
+  font-size: var(--txt-size-p);
+  font-weight: var(--txt-weight-txt);
+  color: var(--clr-primary-txt);
 }
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.wrapper {
+  gap: .5rem;
 }
