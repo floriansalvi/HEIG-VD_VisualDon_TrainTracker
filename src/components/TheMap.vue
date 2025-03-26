@@ -1,5 +1,5 @@
 <script setup>
-import cantonsData from '@/assets/data/cantonsData.json'
+// import cantonsData from '@/assets/data/cantonsData.json'
 
 </script>
 

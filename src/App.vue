@@ -7,6 +7,7 @@
   import TheMostCrowded from './components/TheMostCrowded.vue';
   import TheEmployees from './components/TheEmployees.vue';
   import TheEmployeesRate from './components/TheEmployeesRate.vue';
+  import ArrowLink from './components/ArrowLink.vue';
 </script>
 
 <template>
@@ -17,5 +18,8 @@
   <TheMainStations/>
   <TheMostCrowded/>
   <TheEmployees/>
-  <TheEmployeesRate/>
 </template>
+
+<style scoped>
+
+</style>
