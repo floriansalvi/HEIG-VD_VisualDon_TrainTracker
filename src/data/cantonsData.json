@@ -22,7 +22,12 @@
     },
     {
         "id": "AR",
-        "name": "Appenzell Ausserrhoden",
+        "name": {
+            "fr": "Appenzell Rhodes-Intérieures",
+            "de": "Appenzell Innerrhoden",
+            "it": "Appenzello Interno",
+            "en": "Appenzell Innerrhoden"
+        },
         "stations": {
             "2022": 0,
             "2023": 0,
@@ -38,7 +43,12 @@
     },
     {
         "id": "AI",
-        "name": "Appenzell Innerrhoden",
+        "name": {
+            "fr": "Appenzell Rhodes-Extérieures",
+            "de": "Appenzell Ausserrhoden",
+            "it": "Appenzello Esterno",
+            "en": "Appenzell Ausserrhoden"
+        },
         "stations": {
             "2022": 0,
             "2023": 0,
@@ -54,7 +64,12 @@
     },
     {
         "id": "BL",
-        "name": "Basel-Landschaft",
+        "name": {
+            "fr": "Bâle-Campagne",
+            "de": "Basel-Landschaft",
+            "it": "Basilea Campagna",
+            "en": "Basel-Landschaft"
+        },
         "stations": {
             "2022": 21,
             "2023": 21,
@@ -70,7 +85,12 @@
     },
     {
         "id": "BS",
-        "name": "Basel-Stadt",
+        "name": {
+            "fr": "Bâle-Ville",
+            "de": "Basel-Stadt",
+            "it": "Basilea Città",
+            "en": "Basel-Stadt"
+        },
         "stations": {
             "2022": 4,
             "2023": 4,
@@ -86,7 +106,12 @@
     },
     {
         "id": "BE",
-        "name": "Bern / Berne",
+        "name": {
+            "fr": "Berne",
+            "de": "Bern",
+            "it": "Berna",
+            "en": "Bern"
+        },
         "stations": {
             "2022": 95,
             "2023": 95,
@@ -102,7 +127,12 @@
     },
     {
         "id": "FR",
-        "name": "Fribourg / Freiburg",
+        "name": {
+            "fr": "Fribourg",
+            "de": "Freiburg",
+            "it": "Friburgo",
+            "en": "Fribourg"
+        },
         "stations": {
             "2022": 33,
             "2023": 33,
@@ -118,7 +148,12 @@
     },
     {
         "id": "GE",
-        "name": "Genève",
+        "name": {
+            "fr": "Genève",
+            "de": "Genf",
+            "it": "Ginevra",
+            "en": "Geneva"
+        },
         "stations": {
             "2022": 21,
             "2023": 21,
@@ -134,7 +169,12 @@
     },
     {
         "id": "GL",
-        "name": "Glarus",
+        "name": {
+            "fr": "Glaris",
+            "de": "Glarus",
+            "it": "Glarona",
+            "en": "Glarus"
+        },
         "stations": {
             "2022": 16,
             "2023": 16,
@@ -150,7 +190,12 @@
     },
     {
         "id": "GR",
-        "name": "Graubünden / Grigioni / Grischun",
+        "name": {
+            "fr": "Grisons",
+            "de": "Graubünden",
+            "it": "Grigioni",
+            "en": "Grisons"
+        },
         "stations": {
             "2022": 3,
             "2023": 3,
@@ -166,7 +211,12 @@
     },
     {
         "id": "JU",
-        "name": "Jura",
+        "name": {
+            "fr": "Jura",
+            "de": "Jura",
+            "it": "Giura",
+            "en": "Jura"
+        },
         "stations": {
             "2022": 13,
             "2023": 12,
@@ -182,7 +232,12 @@
     },
     {
         "id": "LU",
-        "name": "Luzern",
+        "name": {
+            "fr": "Lucerne",
+            "de": "Luzern",
+            "it": "Lucerna",
+            "en": "Lucerne"
+        },
         "stations": {
             "2022": 45,
             "2023": 45,
@@ -198,7 +253,12 @@
     },
     {
         "id": "NE",
-        "name": "Neuchâtel",
+        "name": {
+            "fr": "Neuchâtel",
+            "de": "Neuenburg",
+            "it": "Neuchâtel",
+            "en": "Neuchâtel"
+        },
         "stations": {
             "2022": 26,
             "2023": 26,
@@ -214,7 +274,12 @@
     },
     {
         "id": "NW",
-        "name": "Nidwalden",
+        "name": {
+            "fr": "Nidwald",
+            "de": "Nidwalden",
+            "it": "Nidvaldo",
+            "en": "Nidwalden"
+        },
         "stations": {
             "2022": 7,
             "2023": 7,
@@ -230,7 +295,12 @@
     },
     {
         "id": "OW",
-        "name": "Obwalden",
+        "name": {
+            "fr": "Obwald",
+            "de": "Obwalden",
+            "it": "Obvaldo",
+            "en": "Obwalden"
+        },
         "stations": {
             "2022": 11,
             "2023": 11,
@@ -246,7 +316,12 @@
     },
     {
         "id": "SH",
-        "name": "Schaffhausen",
+        "name": {
+            "fr": "Schaffhouse",
+            "de": "Schaffhausen",
+            "it": "Sciaffusa",
+            "en": "Schaffhausen"
+        },
         "stations": {
             "2022": 4,
             "2023": 4,
@@ -262,7 +337,12 @@
     },
     {
         "id": "SZ",
-        "name": "Schwyz",
+        "name": {
+            "fr": "Schwytz",
+            "de": "Schwyz",
+            "it": "Svitto",
+            "en": "Schwyz"
+        },
         "stations": {
             "2022": 15,
             "2023": 15,
@@ -278,7 +358,12 @@
     },
     {
         "id": "SO",
-        "name": "Solothurn",
+        "name": {
+            "fr": "Soleure",
+            "de": "Solothurn",
+            "it": "Soletta",
+            "en": "Solothurn"
+        },
         "stations": {
             "2022": 21,
             "2023": 21,
@@ -294,7 +379,12 @@
     },
     {
         "id": "SG",
-        "name": "St. Gallen",
+        "name": {
+            "fr": "Saint-Gall",
+            "de": "St. Gallen",
+            "it": "San Gallo",
+            "en": "St. Gallen"
+        },
         "stations": {
             "2022": 50,
             "2023": 50,
@@ -310,7 +400,12 @@
     },
     {
         "id": "TG",
-        "name": "Thurgau",
+        "name": {
+            "fr": "Thurgovie",
+            "de": "Thurgau",
+            "it": "Turgovia",
+            "en": "Thurgau"
+        },
         "stations": {
             "2022": 62,
             "2023": 62,
@@ -326,7 +421,12 @@
     },
     {
         "id": "TI",
-        "name": "Ticino",
+        "name": {
+            "fr": "Tessin",
+            "de": "Tessin",
+            "it": "Ticino",
+            "en": "Ticino"
+        },
         "stations": {
             "2022": 34,
             "2023": 35,
@@ -342,7 +442,12 @@
     },
     {
         "id": "UR",
-        "name": "Uri",
+        "name": {
+            "fr": "Uri",
+            "de": "Uri",
+            "it": "Uri",
+            "en": "Uri"
+        },
         "stations": {
             "2022": 5,
             "2023": 5,
@@ -358,7 +463,12 @@
     },
     {
         "id": "VS",
-        "name": "Valais / Wallis",
+        "name": {
+            "fr": "Valais",
+            "de": "Wallis",
+            "it": "Vallese",
+            "en": "Valais"
+        },
         "stations": {
             "2022": 28,
             "2023": 28,
@@ -374,7 +484,12 @@
     },
     {
         "id": "VD",
-        "name": "Vaud",
+        "name": {
+            "fr": "Vaud",
+            "de": "Waadt",
+            "it": "Vaud",
+            "en": "Vaud"
+        },
         "stations": {
             "2022": 76,
             "2023": 76,
@@ -390,7 +505,12 @@
     },
     {
         "id": "ZG",
-        "name": "Zug",
+        "name": {
+            "fr": "Zoug",
+            "de": "Zug",
+            "it": "Zugo",
+            "en": "Zug"
+        },
         "stations": {
             "2022": 19,
             "2023": 19,
@@ -406,7 +526,12 @@
     },
     {
         "id": "ZH",
-        "name": "Zürich",
+        "name": {
+            "fr": "Zurich",
+            "de": "Zürich",
+            "it": "Zurigo",
+            "en": "Zurich"
+        },
         "stations": {
             "2022": 130,
             "2023": 130,
