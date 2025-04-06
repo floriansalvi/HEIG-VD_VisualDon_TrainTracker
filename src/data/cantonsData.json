@@ -1,6 +1,7 @@
 [
     {
         "id": "AG",
+        "canton_number": 19,
         "name": {
             "fr": "Argovie",
             "de": "Aargau",
@@ -22,6 +23,7 @@
     },
     {
         "id": "AR",
+        "canton_number": 16,
         "name": {
             "fr": "Appenzell Rhodes-Intérieures",
             "de": "Appenzell Innerrhoden",
@@ -43,6 +45,7 @@
     },
     {
         "id": "AI",
+        "canton_number": 15,
         "name": {
             "fr": "Appenzell Rhodes-Extérieures",
             "de": "Appenzell Ausserrhoden",
@@ -64,6 +67,7 @@
     },
     {
         "id": "BL",
+        "canton_number": 13,
         "name": {
             "fr": "Bâle-Campagne",
             "de": "Basel-Landschaft",
@@ -85,6 +89,7 @@
     },
     {
         "id": "BS",
+        "canton_number": 12,
         "name": {
             "fr": "Bâle-Ville",
             "de": "Basel-Stadt",
@@ -106,6 +111,7 @@
     },
     {
         "id": "BE",
+        "canton_number": 2,
         "name": {
             "fr": "Berne",
             "de": "Bern",
@@ -127,6 +133,7 @@
     },
     {
         "id": "FR",
+        "canton_number": 10,
         "name": {
             "fr": "Fribourg",
             "de": "Freiburg",
@@ -148,6 +155,7 @@
     },
     {
         "id": "GE",
+        "canton_number": 25,
         "name": {
             "fr": "Genève",
             "de": "Genf",
@@ -169,6 +177,7 @@
     },
     {
         "id": "GL",
+        "canton_number": 8,
         "name": {
             "fr": "Glaris",
             "de": "Glarus",
@@ -190,6 +199,7 @@
     },
     {
         "id": "GR",
+        "canton_number": 18,
         "name": {
             "fr": "Grisons",
             "de": "Graubünden",
@@ -211,6 +221,7 @@
     },
     {
         "id": "JU",
+        "canton_number": 26,
         "name": {
             "fr": "Jura",
             "de": "Jura",
@@ -232,6 +243,7 @@
     },
     {
         "id": "LU",
+        "canton_number": 3,
         "name": {
             "fr": "Lucerne",
             "de": "Luzern",
@@ -253,6 +265,7 @@
     },
     {
         "id": "NE",
+        "canton_number": 24,
         "name": {
             "fr": "Neuchâtel",
             "de": "Neuenburg",
@@ -274,6 +287,7 @@
     },
     {
         "id": "NW",
+        "canton_number": 7,
         "name": {
             "fr": "Nidwald",
             "de": "Nidwalden",
@@ -295,6 +309,7 @@
     },
     {
         "id": "OW",
+        "canton_number": 6,
         "name": {
             "fr": "Obwald",
             "de": "Obwalden",
@@ -316,6 +331,7 @@
     },
     {
         "id": "SH",
+        "canton_number": 14,
         "name": {
             "fr": "Schaffhouse",
             "de": "Schaffhausen",
@@ -337,6 +353,7 @@
     },
     {
         "id": "SZ",
+        "canton_number": 5,
         "name": {
             "fr": "Schwytz",
             "de": "Schwyz",
@@ -358,6 +375,7 @@
     },
     {
         "id": "SO",
+        "canton_number": 11,
         "name": {
             "fr": "Soleure",
             "de": "Solothurn",
@@ -379,6 +397,7 @@
     },
     {
         "id": "SG",
+        "canton_number": 17,
         "name": {
             "fr": "Saint-Gall",
             "de": "St. Gallen",
@@ -400,6 +419,7 @@
     },
     {
         "id": "TG",
+        "canton_number": 20,
         "name": {
             "fr": "Thurgovie",
             "de": "Thurgau",
@@ -421,6 +441,7 @@
     },
     {
         "id": "TI",
+        "canton_number": 21,
         "name": {
             "fr": "Tessin",
             "de": "Tessin",
@@ -442,6 +463,7 @@
     },
     {
         "id": "UR",
+        "canton_number": 4,
         "name": {
             "fr": "Uri",
             "de": "Uri",
@@ -463,6 +485,7 @@
     },
     {
         "id": "VS",
+        "canton_number": 23,
         "name": {
             "fr": "Valais",
             "de": "Wallis",
@@ -484,6 +507,7 @@
     },
     {
         "id": "VD",
+        "canton_number": 22,
         "name": {
             "fr": "Vaud",
             "de": "Waadt",
@@ -505,6 +529,7 @@
     },
     {
         "id": "ZG",
+        "canton_number": 9,
         "name": {
             "fr": "Zoug",
             "de": "Zug",
@@ -526,6 +551,7 @@
     },
     {
         "id": "ZH",
+        "canton_number": 1,
         "name": {
             "fr": "Zurich",
             "de": "Zürich",

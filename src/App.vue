@@ -1,12 +1,12 @@
 <script setup>
-  import TheHeader from './components/TheHeader.vue';
-  import TheIntro from './components/TheIntro.vue';
-  import TheMap from './components/TheMap.vue';
-  import TheAttendance from './components/TheAttendance.vue';
-  import TheMainStations from './components/TheMainStations.vue';
-  import TheMostCrowded from './components/TheMostCrowded.vue';
-  import TheEmployees from './components/TheEmployees.vue';
-  import TheEmployeesRate from './components/TheEmployeesRate.vue';
+  import TheHeader from './views/TheHeader.vue';
+  import TheIntro from './views/TheIntro.vue';
+  import TheMap from './views/TheMap.vue';
+  import TheAttendance from './views/TheAttendance.vue';
+  import TheMainStations from './views/TheMainStations.vue';
+  import TheMostCrowded from './views/TheMostCrowded.vue';
+  import TheEmployees from './views/TheEmployees.vue';
+  import TheEmployeesRate from './views/TheEmployeesRate.vue';
   import ArrowLink from './components/ArrowLink.vue';
 </script>
 
