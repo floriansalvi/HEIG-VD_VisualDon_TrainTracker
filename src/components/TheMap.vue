@@ -12,6 +12,7 @@ import geographicData from '@/data/swissBOUNDARIES3D_1_5_wgs84.json'
 const alternativeDisplay = ref(false);
 //
 
+
 const createMap = () =>  {
   select(".section-map .wrapper")
     .append("div")

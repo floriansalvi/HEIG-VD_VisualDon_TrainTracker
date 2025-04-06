@@ -64,6 +64,13 @@ p {
   color: var(--clr-primary-txt);
 }
 
+a {
+  font-family: var(--txt-font-txt);
+  font-size: var(--txt-size-p);
+  font-weight: var(--txt-weight-display);
+  text-decoration: none;
+}
+
 .wrapper {
   gap: .5rem;
 }
