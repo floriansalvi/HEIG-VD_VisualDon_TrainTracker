@@ -15,6 +15,7 @@
 
   --txt-size-h1: 8rem;
   --txt-size-h2: 2.5rem;
+  --txt-size-h3: 1.25rem;
   --txt-size-p: 1rem
 }
 
@@ -57,6 +58,13 @@ h2 {
   color: var(--clr-primary-txt);
 }
 
+h3 {
+  font-family: var(--txt-font-display);
+  font-size: var(--txt-size-h3);
+  font-weight: var(--txt-weight-display);
+  color: var(--clr-primary-txt);
+}
+
 p {
   font-family: var(--txt-font-txt);
   font-size: var(--txt-size-p);
@@ -73,4 +81,16 @@ a {
 
 .wrapper {
   gap: .5rem;
+}
+
+.tooltip {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+  }
 }
