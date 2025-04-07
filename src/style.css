@@ -1,5 +1,6 @@
 :root {
   --clr-accent: #D72E20;
+  --clr-accent-light: #fae8e6;
 
   --clr-primary-bg: #fafafa;
   --clr-primary-txt: #111111;
@@ -73,6 +74,13 @@ p {
 }
 
 a {
+  font-family: var(--txt-font-txt);
+  font-size: var(--txt-size-p);
+  font-weight: var(--txt-weight-display);
+  text-decoration: none;
+}
+
+span {
   font-family: var(--txt-font-txt);
   font-size: var(--txt-size-p);
   font-weight: var(--txt-weight-display);

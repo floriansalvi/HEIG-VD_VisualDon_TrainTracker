@@ -16,7 +16,6 @@
 <style scoped>
     section {
         background-color: var(--clr-primary-bg);
-        
     }
 
     .wrapper {
