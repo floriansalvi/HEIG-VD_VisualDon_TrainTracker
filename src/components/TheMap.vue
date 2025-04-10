@@ -2,14 +2,24 @@
 
 import { select } from 'd3-selection';
 import * as d3 from 'd3'
-import { onMounted, onUnmounted, ref, shallowReactive, watch } from 'vue';
+import { onMounted, onUnmounted, ref, computed, watch } from 'vue';
 import { round2decimals, formatBigNumber } from '../modules/utils';
+import { accent, accent_light } from '../modules/colors';
 
 import cantonsData from '@/data/cantonsData.json';
 import geographicData from '@/data/swissBOUNDARIES3D_1_5_wgs84.json'
 
 
-const showStationPopRatio = ref(true);
+const showStationPopRatio = ref(false);
+
+let colorScale
+let map
+
+const captionMaxLabel = computed({
+        get: () => {
+            return showStationPopRatio.value ? d3.max(cantonsData, d => round2decimals((d.stations[2024] / (d.population.years[2024] / 100000)))) : d3.max(cantonsData, d => d.stations[2024])
+        }
+})
 
 /*
 * Generate a color scale based on the showStationPopRatio value
@@ -19,12 +29,12 @@ const getColorScale = () => {
   if (!showStationPopRatio.value) {
     return d3.scaleSequential(
       [0,d3.max(cantonsData,d => d.stations[2024])],
-      d3.interpolateHslLong("#fae8e6", "#D72E20")
+      d3.interpolateHslLong(accent_light, accent)
     );
   } else {
     return d3.scaleSequential(
       [0,d3.max(cantonsData,d => (d.stations[2024] / (d.population.years[2024] / 100000)))],
-      d3.interpolateHslLong("#fae8e6", "#D72E20")
+      d3.interpolateHslLong(accent_light, accent)
     );
   }
 }
@@ -35,21 +45,14 @@ const getColorScale = () => {
 *
 */
 const createMap = () =>  {
-  
-  // Delete the map if it already exists
-  select(".map-svg").remove();
-
-  // Select the container and appends a new div with the class "map-svg"
-  select(".section-map .wrapper")
-    .append("div")
-    .attr("class", "map-svg");
 
   // Define the map height and width
-  const width = select(".section-map .wrapper").node().getBoundingClientRect().width
-  const height = '600'
+  // const width = select(".section-map .wrapper").node().getBoundingClientRect().width
+  const width = 1000
+  const height = width * 0.65
 
   // Define the map's color scale based on the datas
-  const colorScale = getColorScale();
+  colorScale = getColorScale();
 
   // Define the type of projection the map uses
   const projection = d3.geoMercator()
@@ -60,13 +63,13 @@ const createMap = () =>  {
     .projection(projection);
 
   // Select the div and append a new svg inside
-  const mapSvg = select('.map-svg')
+  const mapSvg = select('.section-map .wrapper .map-svg')
     .append('svg')
     .attr('width', width)
     .attr('height', height);
   
   // Append a group element to the SVG
-  const map = mapSvg
+  map = mapSvg
     .append('g');
   
   // Create the tooltip that is displayed when the pointer is on the map
@@ -149,12 +152,77 @@ const createMap = () =>  {
 }
 
 /*
+* Create the map's caption and append it in the wrapper
+*
+*/
+const createCaption = () => {
+  
+  const width = select(".input-wrapper").node().getBoundingClientRect().width
+  const height = '1rem'
+
+  const rectangleSvg = select(".caption-svg")
+    .append('svg')
+    .attr('width', width)
+    .attr('height', height);
+
+  const defs = rectangleSvg.append("defs");
+  const gradient = defs.append("linearGradient")
+    .attr("id", "caption-gradient")
+    .attr("x1", "0%").attr("y1", "0%")
+    .attr("x2", "100%").attr("y2", "0%");
+
+  gradient.append("stop")
+    .attr("offset", "0%")
+    .attr("stop-color", accent_light);
+
+  gradient.append("stop")
+    .attr("offset", "100%")
+    .attr("stop-color", accent);
+  
+  rectangleSvg.append('rect')
+    .attr('x', 0)
+    .attr('y', 0)
+    .attr('width', width)
+    .attr('height', height)
+    .attr('fill', 'url(#caption-gradient)')
+}
+
+/*
+* Update the map colors
+*
+*/
+const updateCantonColors = () => {
+  // Update color scale
+  colorScale = getColorScale();
+  
+  // Update each cantons color with a transition
+  map.selectAll('path')
+    .transition()
+    .duration(1000)
+    .attr('fill', d => {
+      const canton = cantonsData.find(c => c.canton_number == d.properties.kantonsnummer);
+      
+      if (canton) {
+        const value = showStationPopRatio.value
+          ? canton.stations[2024] / (canton.population.years[2024] / 100000)
+          : canton.stations[2024];
+        return colorScale(value);
+      }
+    });
+}
+
+const updateMapSize = () => {
+
+}
+
+/*
 * Initialize and render the map once the component is fully loaded
 *
 */
 onMounted(() => {
   createMap()
-  window.addEventListener('resize', createMap);
+  createCaption()
+  window.addEventListener('resize', updateMapSize);
 })
 
 /*
@@ -162,7 +230,7 @@ onMounted(() => {
 *
 */
 onUnmounted(() => {
-  window.removeEventListener('resize', createMap);
+  window.removeEventListener('resize', updateMapSize);
 })
 
 /*
@@ -170,7 +238,10 @@ onUnmounted(() => {
 *
 */
 watch(showStationPopRatio, () => {
-  createMap();
+  updateCantonColors();
+  document.querySelectorAll('.span-txt').forEach(el => {
+    el.classList.toggle('inactive');
+  });
 });
 
 </script>
@@ -179,14 +250,21 @@ watch(showStationPopRatio, () => {
   <section class="section-map">
     <div class="wrapper">
       <h2>Les gares CFF en 2024</h2>
-
-      <div class="input-wrapper">
-        <span>Gares CFF</span>
-        <label class="toggle-switch">
-          <input type="checkbox" v-model="showStationPopRatio">
-          <span class="slider"></span>
-        </label>
-        <span>Gares CFF pour 100 000 habitant.e.s</span>
+      <div class="map-svg"></div>
+      <div class="map-info">
+        <div class="caption-wrapper">
+          <span class="span-caption">0</span>
+          <div class="caption-svg"></div>
+          <span class="span-caption">{{ captionMaxLabel }}</span>
+        </div>
+        <div class="input-wrapper">
+          <span class="span-txt">Gares CFF</span>
+          <label class="toggle-switch">
+            <input type="checkbox" v-model="showStationPopRatio">
+            <span class="slider"></span>
+          </label>
+          <span class="span-txt inactive">Gares CFF pour 100 000 habitant.e.s</span>
+        </div>
       </div>
     </div>
   </section>
@@ -196,12 +274,14 @@ watch(showStationPopRatio, () => {
   section {
     background-color: var(--clr-primary-bg);
   }
+
   .wrapper {
-    height: inherit;
+    height: max-content;
     grid-column: 3 / span 8;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    gap: 3rem;
+    margin: auto;
   }
   .input-wrapper{
     display: flex;
@@ -212,6 +292,7 @@ watch(showStationPopRatio, () => {
   .input-wrapper {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 1rem;
 }
 
@@ -235,7 +316,7 @@ watch(showStationPopRatio, () => {
   right: 0; bottom: 0;
   background-color: var(--clr-secondary-bg);
   border-radius: 3rem;
-  transition: 0.3s;
+  transition: 500ms ease-in-out;
 }
 
 .slider::before {
@@ -245,7 +326,7 @@ watch(showStationPopRatio, () => {
   left: .25rem; bottom: .25rem;
   background-color: var(--clr-white);
   border-radius: 50%;
-  transition: 0.3s;
+  transition: 500ms ease-in-out;
 }
 
 .toggle-switch input:checked + .slider {
@@ -255,4 +336,37 @@ watch(showStationPopRatio, () => {
 .toggle-switch input:checked + .slider::before {
   transform: translateX(1.5rem);
 }
+
+.span-txt.inactive {
+  opacity: .25;
+}
+
+.map-info{
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.input-wrapper{
+  width: fit-content;
+  margin: auto;
+}
+
+.caption-wrapper{
+  display: flex;
+  flex-direction: row;
+  gap: .5rem;
+  margin: auto;
+}
+
+.span-caption{
+  min-width: 5rem;
+  text-align: right;
+}
+
+.span-caption:last-of-type{
+  text-align: left;
+}
+
 </style>

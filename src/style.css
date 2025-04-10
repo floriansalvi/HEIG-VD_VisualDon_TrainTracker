@@ -85,6 +85,7 @@ span {
   font-size: var(--txt-size-p);
   font-weight: var(--txt-weight-display);
   text-decoration: none;
+  transition: 500ms ease-in-out;
 }
 
 .wrapper {
