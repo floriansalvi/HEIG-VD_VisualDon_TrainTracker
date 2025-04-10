@@ -14,6 +14,9 @@ const showStationPopRatio = ref(false);
 
 let colorScale
 let map
+let mapSvg
+let projection
+let path
 
 const captionMaxLabel = computed({
         get: () => {
@@ -48,22 +51,22 @@ const createMap = () =>  {
 
   // Define the map height and width
   // const width = select(".section-map .wrapper").node().getBoundingClientRect().width
-  const width = 1000
+  const width = select(".section-map .wrapper").node().getBoundingClientRect().width
   const height = width * 0.65
 
   // Define the map's color scale based on the datas
   colorScale = getColorScale();
 
   // Define the type of projection the map uses
-  const projection = d3.geoMercator()
+  projection = d3.geoMercator()
     .fitExtent([[0, 0], [width, height]], geographicData);
 
   // Create a path generator using the specified geographical projection
-  const path = d3.geoPath()
+  path = d3.geoPath()
     .projection(projection);
 
   // Select the div and append a new svg inside
-  const mapSvg = select('.section-map .wrapper .map-svg')
+  mapSvg = select('.section-map .wrapper .map-svg')
     .append('svg')
     .attr('width', width)
     .attr('height', height);
@@ -158,7 +161,7 @@ const createMap = () =>  {
 const createCaption = () => {
   
   const width = select(".input-wrapper").node().getBoundingClientRect().width
-  const height = '1rem'
+  const height = '16'
 
   const rectangleSvg = select(".caption-svg")
     .append('svg')
@@ -212,7 +215,20 @@ const updateCantonColors = () => {
 }
 
 const updateMapSize = () => {
+ 
+  const width = select(".section-map .wrapper").node().getBoundingClientRect().width;
+  const height = width * 0.65;
+ 
+  mapSvg
+  .attr('width', width)
+  .attr('height', height);
 
+  projection.fitExtent([[0, 0], [width, height]], geographicData)
+  
+  path = d3.geoPath().projection(projection)
+
+  map.selectAll('path')
+    .attr('d', path)
 }
 
 /*
@@ -281,7 +297,6 @@ watch(showStationPopRatio, () => {
     display: flex;
     flex-direction: column;
     gap: 3rem;
-    margin: auto;
   }
   .input-wrapper{
     display: flex;
