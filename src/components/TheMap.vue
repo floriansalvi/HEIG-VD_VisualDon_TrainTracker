@@ -124,7 +124,7 @@ const createMap = () =>  {
         tooltip.html(
           canton 
             ?`
-              <h3>${canton.name.fr}</h3>
+              <h3>📍 ${canton.name.fr}</h3>
               <div class="general-data">
                 <p>Gares CFF : ${canton.stations[2024]}</p>
                 <p>Population : ${formatBigNumber(canton.population.years[2024])}</p>
