@@ -51,7 +51,7 @@ const createMap = () =>  {
 
   // Define the map height and width
   // const width = select(".section-map .wrapper").node().getBoundingClientRect().width
-  const width = select(".section-map .wrapper").node().getBoundingClientRect().width
+  const width = select(".section-map .wrapper").node().getBoundingClientRect().width*0.95
   const height = width * 0.65
 
   // Define the map's color scale based on the datas
@@ -92,9 +92,6 @@ const createMap = () =>  {
     .join(enter => enter.append('path')
       .attr('d', path)
       .attr('id', d => d.properties.kantonsnummer)
-      // .attr('fill', 'white')
-      // .transition()
-      // .duration(6000)
       
       // Set the fill color dynamically using a data-driven scale
       .attr('fill', d => {
@@ -159,16 +156,31 @@ const createMap = () =>  {
 *
 */
 const createCaption = () => {
-  
-  const width = select(".input-wrapper").node().getBoundingClientRect().width
-  const height = '16'
+  const width = select(".input-wrapper").node().getBoundingClientRect().width;
 
-  const rectangleSvg = select(".caption-svg")
-    .append('svg')
-    .attr('width', width)
-    .attr('height', height);
+  // ⚠️ Supprime TOUT le contenu de la div caption-svg, y compris les anciens <svg>
+  select(".caption-svg").html("");
 
-  const defs = rectangleSvg.append("defs");
+  // Crée un nouveau svg vide
+  select(".caption-svg")
+    .append("svg")
+    .attr("width", width)
+    .attr("height", 40);
+
+  updateCaption(); // Dessine la première version
+};
+
+const updateCaption = () => {
+  const width = select(".input-wrapper").node().getBoundingClientRect().width;
+  const height = 16;
+
+  const svg = select(".caption-svg svg");
+
+  svg.selectAll("*").remove();
+
+  const paddingX = 20; // espace à gauche et à droite
+
+  const defs = svg.append("defs");
   const gradient = defs.append("linearGradient")
     .attr("id", "caption-gradient")
     .attr("x1", "0%").attr("y1", "0%")
@@ -181,14 +193,33 @@ const createCaption = () => {
   gradient.append("stop")
     .attr("offset", "100%")
     .attr("stop-color", accent);
-  
-  rectangleSvg.append('rect')
-    .attr('x', 0)
+
+  svg.append('rect')
+    .attr('x', paddingX)
     .attr('y', 0)
-    .attr('width', width)
+    .attr('width', width - 2 * paddingX)
     .attr('height', height)
-    .attr('fill', 'url(#caption-gradient)')
-}
+    .attr('fill', 'url(#caption-gradient)');
+
+  const steps = 5;
+  const stepWidth = (width - 2 * paddingX) / (steps - 1);
+  const max = captionMaxLabel.value;
+
+  for (let i = 0; i < steps; i++) {
+    const x = paddingX + i * stepWidth;
+    const value = (max / (steps - 1)) * i;
+    svg.append("text")
+      .attr("x", x)
+      .attr("y", height + 24)
+      .attr("text-anchor", "middle")
+      .attr("font-size", "0.75rem")
+      .attr("fill", "var(--clr-text)")
+      .text(round2decimals(value));
+  }
+};
+
+
+
 
 /*
 * Update the map colors
@@ -255,6 +286,7 @@ onUnmounted(() => {
 */
 watch(showStationPopRatio, () => {
   updateCantonColors();
+  updateCaption(); // <- Redraw caption based on new data
   document.querySelectorAll('.span-txt').forEach(el => {
     el.classList.toggle('inactive');
   });
@@ -269,9 +301,7 @@ watch(showStationPopRatio, () => {
       <div class="map-svg"></div>
       <div class="map-info">
         <div class="caption-wrapper">
-          <span class="span-caption">0</span>
           <div class="caption-svg"></div>
-          <span class="span-caption">{{ captionMaxLabel }}</span>
         </div>
         <div class="input-wrapper">
           <span class="span-txt">Gares CFF</span>
@@ -296,8 +326,9 @@ watch(showStationPopRatio, () => {
     grid-column: 3 / span 8;
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    gap: 2rem;
   }
+
   .input-wrapper{
     display: flex;
     flex-direction: row;
@@ -360,7 +391,7 @@ watch(showStationPopRatio, () => {
   width: auto;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
 }
 
 .input-wrapper{
@@ -382,6 +413,11 @@ watch(showStationPopRatio, () => {
 
 .span-caption:last-of-type{
   text-align: left;
+}
+
+.caption-svg {
+  font-family: var(--txt-font-txt);
+  font-weight: var(--txt-weight-display);
 }
 
 </style>
