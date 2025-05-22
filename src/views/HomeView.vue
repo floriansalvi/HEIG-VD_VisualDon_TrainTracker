@@ -19,6 +19,7 @@ import topStations from '../components/TopStation.vue'
 <template>
   <TheHeader />
   <TheBoard />
+  <TheDelays />
   <TheIntro />
   <TheMap />
   <TheAttendance />

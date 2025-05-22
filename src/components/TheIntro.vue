@@ -1,29 +1,51 @@
-<script setup>
-
-</script>
-
 <template>
   <section>
     <div class="wrapper">
-        <h2>Introduction</h2>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident laboriosam facilis doloribus repudiandae officiis alias optio blanditiis eligendi, maxime doloremque, soluta temporibus, architecto officia sed aperiam animi enim tenetur facere.
-        Nisi soluta distinctio nobis quibusdam, modi sequi iusto unde corrupti debitis autem ipsa assumenda earum aliquam quaerat illo ut perspiciatis odit dolorum asperiores, eveniet dolores cupiditate pariatur quos facilis! Aliquid.
-        Aliquam sit, porro alias assumenda nisi velit ad nemo veniam quam dolores quas impedit magnam blanditiis autem rem iure, sint fuga, libero laborum modi! Dolores, inventore qui. Hic, a soluta!</p>
+      <h2>Introduction</h2>
+      <p>
+        Le projet Train Tracker s’inscrit dans le cadre du cours VisualDon à la
+        HEIG-VD. Il a pour objectif de développer une interface interactive
+        permettant de visualiser des données ferroviaires en temps réel ou
+        simulées. Grâce à une approche axée sur la visualisation de données, ce
+        projet permet d'explorer des aspects tels que la fréquentation des
+        gares, les retards, les correspondances ou encore l’occupation des
+        quais.
+      </p>
+      <p>
+        Ce travail met en œuvre des technologies modernes telles que Vue.js pour
+        l’interface utilisateur et D3.js pour la visualisation dynamique des
+        données. En combinant design intuitif et données pertinentes, le projet
+        vise à offrir un outil pédagogique et fonctionnel, tout en illustrant
+        les principes de base de la datavisualisation.
+      </p>
+      <p class="tagline">
+        Monte dans le train avec nous pour découvrir ce que révèlent les données
+        !
+      </p>
     </div>
   </section>
 </template>
+<script setup></script>
 
 <style scoped>
-    section {
-        background-color: var(--clr-primary-bg);
-    }
+section {
+  background-color: var(--clr-primary-bg);
+}
 
-    .wrapper {
-        height:inherit;
-        grid-column: 7 / span 3;
-        display: flex;
-        flex-direction: column;
+.wrapper {
+  height: inherit;
+  grid-column: 7 / span 4;
+  display: flex;
+  flex-direction: column;
 
-        justify-content: center;
-    }
+  justify-content: center;
+}
+.tagline {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--clr-accent); /* adapte si tu veux */
+  font-size: 1.1rem;
+  margin-top: 2rem;
+  text-align: center;
+}
 </style>

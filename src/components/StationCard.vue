@@ -78,7 +78,7 @@ export default {
 .red-square {
   display: inline-block;
   width: 32px;
-  height: 28px;
+  height: 12px;
   background: #d72e20;
   border-radius: 0;
   margin-right: 8px;

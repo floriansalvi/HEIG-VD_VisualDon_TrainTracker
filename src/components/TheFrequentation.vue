@@ -20,6 +20,10 @@ const heatmapContainer = ref(null)
 
 onMounted(async () => {
   const data = await loadMainStations()
+  const containerWidth = heatmapContainer.value.clientWidth
+  const cellSize = containerWidth / 10 // adapte selon le ratio que tu veux
+  const height = cellSize * 5 + 160
+  const width = containerWidth
 
   const dataEdited = data
     .filter((station) => station.jahr >= 2020 && station.jahr <= 2024)
@@ -63,15 +67,13 @@ onMounted(async () => {
     })
   })
 
-  const width = 700
-  const height = 450
-  const cellSize = 65
-
   const svg = d3
     .select(heatmapContainer.value)
     .append('svg')
-    .attr('width', width)
-    .attr('height', height + 80)
+    .attr('viewBox', `0 0 ${width} ${height}`)
+    .attr('preserveAspectRatio', 'xMidYMid meet')
+    .style('width', '100%')
+    .style('height', 'auto')
 
   const color = d3
     .scaleLinear()
@@ -82,7 +84,7 @@ onMounted(async () => {
     .selectAll('rect')
     .data(heatmapData)
     .join('rect')
-    .attr('x', (d) => d.x * cellSize + 100)
+    .attr('x', (d) => d.x * cellSize + cellSize * 2)
     .attr('y', (d) => d.y * cellSize + 80)
     .attr('width', cellSize)
     .attr('height', cellSize)
@@ -108,10 +110,13 @@ onMounted(async () => {
     .data(allYears)
     .join('text')
     .attr('class', 'year')
-    .attr('x', (d, i) => i * cellSize + 130)
+    .attr('x', (d, i) => i * cellSize + cellSize * 2.5)
     .attr('y', 50)
     .attr('text-anchor', 'middle')
-    .attr('transform', (d, i) => `rotate(-45 ${i * cellSize + 130},50)`)
+    .attr(
+      'transform',
+      (d, i) => `rotate(-45 ${i * cellSize + cellSize * 2.5},50)`
+    )
     .text((d) => d)
 
   svg
@@ -119,15 +124,15 @@ onMounted(async () => {
     .data(top5)
     .join('text')
     .attr('class', 'gare')
-    .attr('x', 90)
+    .attr('x', cellSize * 1.9)
     .attr('y', (d, i) => i * cellSize + 115)
     .attr('text-anchor', 'end')
     .text((d) => d)
 
-  // === LÉGENDE RECTANGULAIRE AVEC TICKS TEXTUELS UNIQUEMENT ===
-  const legendWidth = 300
+  // Légende responsive
+  const legendWidth = cellSize * 5
   const legendHeight = 15
-  const legendX = 108
+  const legendX = cellSize * 2
   const legendY = top5.length * cellSize + 100
 
   const legend = svg
@@ -176,7 +181,7 @@ onMounted(async () => {
 
 <style scoped>
 .section-heatmap {
-  background-color: var(--clr-primary-bg);
+  background-color: white;
   font-family: var(--txt-font-txt);
   width: 100%;
   min-height: 100vh;
