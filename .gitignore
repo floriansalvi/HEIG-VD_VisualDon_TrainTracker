@@ -1,4 +1,12 @@
-# Logs
+# 📦 Node & package manager files
+node_modules/
+dist/
+dist-ssr/
+.vite/
+.cache/
+*.local
+
+# 📑 Logs
 logs
 *.log
 npm-debug.log*
@@ -7,18 +15,23 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
+# 🧠 Environment
+.env
+.env.*.local
 
-# Editor directories and files
-.vscode/*
+# 🛠 IDEs & editors
+.vscode/
 !.vscode/extensions.json
-.idea
+.idea/
 .DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# 🔧 System
+Thumbs.db
+
+# Local Netlify folder
+.netlify
