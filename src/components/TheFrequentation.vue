@@ -1,5 +1,6 @@
 <template>
   <section class="section-heatmap">
+    <Tracks class="tracks-wrapper"></Tracks>
     <div class="wrapper">
       <h2>Évolution du nombre d'usager·ères</h2>
       <h3>2020 à 2024</h3>
@@ -14,6 +15,7 @@ import * as d3 from 'd3'
 import { ref, onMounted } from 'vue'
 import { loadMainStations } from '../modules/api'
 import { accent, accent_light } from '../modules/colors'
+import Tracks from './bases/Tracks.vue'
 
 const tooltip = ref(null)
 const heatmapContainer = ref(null)
@@ -194,25 +196,18 @@ onMounted(async () => {
 .section-heatmap {
   background-color: white;
   font-family: var(--txt-font-txt);
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
+  align-items: center;
 }
 .wrapper {
+  height: inherit;
+  grid-column: 5 / span 7;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-end;
-  padding: 2rem;
-  text-align: right;
-  width: 800px;
-  max-width: 100vw;
+  justify-content: center;
+  margin-top: auto;
 }
 .heatmap-container {
   position: relative;
-  padding-bottom: 3.5rem;
   overflow: visible;
   width: 100%;
 }
@@ -229,14 +224,19 @@ onMounted(async () => {
   padding: 1rem;
   border-radius: 0.5rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  pointer-events: none;
+  pointer-events: auto;
   opacity: 0;
   transition: opacity 0.3s ease;
   font-family: var(--txt-font-txt);
   font-size: 0.9rem;
   text-align: left;
+  z-index: 9999;
 }
 .legend {
   overflow: visible;
+}
+
+.tracks-wrapper {
+  grid-column: 2 / span 2;
 }
 </style>

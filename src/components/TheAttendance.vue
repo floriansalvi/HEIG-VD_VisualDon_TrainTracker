@@ -1,7 +1,10 @@
-<script setup></script>
+<script setup>
+import Tracks from './bases/Tracks.vue';
+</script>
 
 <template>
   <section>
+    <Tracks class="tracks-wrapper"></Tracks>
     <div class="wrapper">
       <h2>Tous les jours...</h2>
       <p>
@@ -36,5 +39,9 @@ section {
 
 .wrapper p {
   margin-bottom: 1.2rem;
+}
+
+.tracks-wrapper {
+  grid-column: 2 / span 2;
 }
 </style>
