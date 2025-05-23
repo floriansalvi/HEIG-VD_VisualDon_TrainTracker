@@ -102,7 +102,7 @@ onMounted(async () => {
 
 <style scoped>
 .section-delay {
-  background-color: var(--clr-primary-bg);
+  background-color: var(--clr-white-dark);
   height: 100vh;
   display: flex;
   align-items: center;

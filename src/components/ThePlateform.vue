@@ -52,7 +52,7 @@ onMounted(async () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: white;
+  background-color: var(--clr-white-dark);
   padding: 4rem;
   height: 100vh;
   font-family: sans-serif;

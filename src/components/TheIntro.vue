@@ -1,5 +1,6 @@
 <template>
   <section>
+    <Tracks class="tracks-wrapper"></Tracks>
     <div class="wrapper">
       <h2>Introduction</h2>
       <p>
@@ -25,7 +26,12 @@
     </div>
   </section>
 </template>
-<script setup></script>
+
+<script setup>
+import Tracks from './bases/Tracks.vue';
+
+
+</script>
 
 <style scoped>
 section {
@@ -48,4 +54,9 @@ section {
   margin-top: 2rem;
   text-align: center;
 }
+
+.tracks-wrapper {
+  grid-column: 2 / span 2;
+}
+
 </style>

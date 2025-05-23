@@ -1,5 +1,6 @@
 <template>
   <section class="section-bar">
+    <Tracks class="tracks-wrapper"></Tracks>
     <div class="wrapper">
       <h2>Nombre de quais par gare CFF</h2>
       <div ref="barChartContainer" class="bar-chart-container"></div>
@@ -13,6 +14,7 @@ import * as d3 from 'd3'
 import { onMounted, ref, nextTick } from 'vue'
 import { loadPerron } from '../modules/api'
 import { accent } from '../modules/colors'
+import Tracks from './bases/Tracks.vue'
 
 const barChartContainer = ref(null)
 const tooltip = ref(null)
@@ -130,18 +132,14 @@ onMounted(async () => {
 .section-bar {
   background-color: white;
   font-family: var(--txt-font-txt);
-  display: flex;
-  justify-content: flex-end; /* ⚠️ Colle la section à droite */
-  width: 100%;
 }
 
 .wrapper {
+  height: inherit;
+  grid-column: 7 / span 4;
   display: flex;
   flex-direction: column;
-  align-items: flex-end; /* ⚠️ Colle le contenu à droite */
-  text-align: right;
-  padding: 2rem 3rem;
-  max-width: 100%;
+  justify-content: center;
 }
 
 .bar-chart-container {
@@ -183,5 +181,9 @@ onMounted(async () => {
   font-family: var(--txt-font-txt);
   font-size: 0.9rem;
   text-align: left;
+}
+
+.tracks-wrapper {
+  grid-column: 2 / span 2;
 }
 </style>

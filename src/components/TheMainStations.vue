@@ -5,6 +5,7 @@ import { onMounted, onUnmounted } from 'vue';
 import { round2decimals, formatBigNumber } from '../modules/utils';
 import { accent, accent_light, blueCff } from '../modules/colors';
 import { loadMainStations, loadStationShops, loadCoordinates, loadLanguage } from '../modules/api';
+import Tracks from './bases/Tracks.vue';
 
 let svg;
 let radiusScale;
@@ -198,6 +199,7 @@ onUnmounted(() => {
 
 <template>
   <section>
+    <Tracks class="tracks-wrapper"></Tracks>
     <div class="wrapper">
       <h2>Les gares suisses principales</h2>
       <div class="sgv-wrapper"></div>
@@ -232,5 +234,9 @@ section {
   font-weight: var(--txt-weight-txt);
   fill: var(--clr-white);
   pointer-events: none;
+}
+
+.tracks-wrapper {
+  grid-column: 2 / span 2;
 }
 </style>

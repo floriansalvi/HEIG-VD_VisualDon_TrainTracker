@@ -6,56 +6,108 @@ import { round2decimals, formatBigNumber } from '../modules/utils';
 import { accent, accent_light } from '../modules/colors';
 import cantonsData from '@/data/cantonsData.json';
 import geographicData from '@/data/swissBOUNDARIES3D_1_5_wgs84.json'
+import { loadEmployees } from '../modules/api';
+import { forEach } from 'lodash';
 
-let colorScale
-let map
-let mapSvg
-let projection
-let path
+let colorScale;
+let map;
+let mapSvg;
+let projection;
+let path;
 
-// Valeur maximale pour la légende (fixe - nombre de gares)
-const captionMaxLabel = d3.max(cantonsData, d => d.stations[2024]);
+// ** variable globale pour stocker les cantons enrichis **
+let enrichedCantons = [];
 
-/*
-* Generate a color scale (simplifié - uniquement pour les gares)
-*/
+const cantonNameMap = {
+  'Aargau': 'Aargau',
+  'Appenzell Ausserrhoden': 'Appenzell Ausserrhoden',
+  'Appenzell Innerrhoden': 'Appenzell Innerrhoden',
+  'Basel-Stadt': 'Basel-Stadt',
+  'Basel-Landschaft': 'Basel-Landschaft',
+  'Bern': 'Bern / Berne',
+  'Fribourg': 'Fribourg / Freiburg',
+  'Geneva': 'Genève',
+  'Glarus': 'Glarus',
+  'Graubünden': 'Graubünden / Grigioni / Grischun',
+  'Grisons': 'Graubünden / Grigioni / Grischun', // si tu as "Grisons" en anglais aussi
+  'Jura': 'Jura',
+  'Lucerne': 'Luzern',
+  'Neuchâtel': 'Neuchâtel',
+  'Nidwalden': 'Nidwalden',
+  'Obwalden': 'Obwalden',
+  'Schaffhausen': 'Schaffhausen',
+  'Schwyz': 'Schwyz',
+  'Solothurn': 'Solothurn',
+  'St. Gallen': 'St. Gallen',
+  'Thurgau': 'Thurgau',
+  'Ticino': 'Ticino',
+  'Uri': 'Uri',
+  'Valais': 'Valais / Wallis',
+  'Vaud': 'Vaud',
+  'Zug': 'Zug',
+  'Zurich': 'Zürich',
+  'Zürich': 'Zürich',
+  // si tu as un canton "Ausland" ou autre, mappe-le aussi si besoin
+  'Other countries': 'Ausland/Étranger/Estero/Other countries'
+};
+
+// Fonction pour charger les employés et enrichir cantonsData
+async function getMappedCantons() {
+  const employees = await loadEmployees();
+
+  const mappedCantons = cantonsData.map(canton => {
+    // Normalisation du nom anglais vers celui dans employees
+    const normalizedName = cantonNameMap[canton.name.en] || canton.name.en;
+
+    const match = employees.find(emp => emp.kanton_canton_cantone === normalizedName);
+
+    if (!match) {
+      console.warn(`Pas trouvé dans loadEmployees pour : ${canton.name.en} (mapped to: ${normalizedName})`);
+    }
+
+    const employeesCount = match ? match["2024"] : 0;
+    const population = canton.population.years[2024] || 1; // éviter division par 0, mettre une valeur par défaut
+
+    const employeesPer1000 = (employeesCount / population) * 1000;
+
+    return {
+      ...canton,
+      employees_2024: employeesCount,
+      employeesPer1000: employeesPer1000,
+    };
+  });
+
+  return mappedCantons;
+}
+
+// Mise à jour de l'échelle de couleurs selon les données enrichies
 const getColorScale = () => {
   return d3.scaleSequential(
-    [0, d3.max(cantonsData, d => d.stations[2024])],
+    [0, d3.max(enrichedCantons, d => d.employeesPer1000  || 0)],
     d3.interpolateHslLong(accent_light, accent)
   );
 }
 
-/*
-* Create the map and display it in the DOM
-*/
 const createMap = () => {
-  // Define the map height and width
-  const width = select(".railway-map .container").node().getBoundingClientRect().width * 0.95
-  const height = width * 0.65
+  const width = select(".railway-map .wrapper").node().getBoundingClientRect().width * 0.85;
+  const height = width * 0.65;
 
-  // Define the map's color scale
   colorScale = getColorScale();
 
-  // Define the type of projection the map uses
   projection = d3.geoMercator()
     .fitExtent([[0, 0], [width, height]], geographicData);
 
-  // Create a path generator using the specified geographical projection
   path = d3.geoPath()
     .projection(projection);
 
-  // Select the div and append a new svg inside
-  mapSvg = select('.railway-map .container .chart-area')
+  mapSvg = select('.railway-map .wrapper .chart-area')
     .append('svg')
     .attr('width', width)
     .attr('height', height);
 
-  // Append a group element to the SVG
   map = mapSvg.append('g');
 
-  // Create the tooltip
-  const tooltip = d3.select(".railway-map .container")
+  const tooltip = d3.select("body")
     .append("div")
     .attr("class", "tooltip")
     .style("position", "absolute")
@@ -63,68 +115,61 @@ const createMap = () => {
     .style("background", "var(--clr-white)")
     .style("padding", "1rem")
     .style("border-radius", "0.5rem")
-    .style("pointer-events", "none");
+    .style("pointer-events", "none")
+    .style("box-shadow", "0 2px 10px rgba(0,0,0,0.1)")
+    .style("z-index", "1000");
 
-  // Create the paths for each canton
   map.selectAll('path')
     .data(geographicData.features)
     .join(enter => enter.append('path')
       .attr('d', path)
       .attr('id', d => d.properties.kantonsnummer)
-      
-      // Set the fill color (simplifié - uniquement gares)
       .attr('fill', d => {
-        const canton = cantonsData.find(c => c.canton_number == d.properties.kantonsnummer)
-        
+        const canton = enrichedCantons.find(c => c.canton_number == d.properties.kantonsnummer);
         if (canton) {
-          const value = canton.stations[2024];
+          const value = canton.employeesPer1000 || 0;
           return colorScale(value);
         }
+        return "#ccc";
       })
-      .attr('stroke', '#fafafa')
+      .attr('stroke', 'var(--clr-white-dark)')
       .attr('stroke-width', 1.25)
-
-      // Show the tooltip when mouse enters a canton
       .on("mouseover", (event, d) => {
-        const canton = cantonsData.find(c => c.canton_number == d.properties.kantonsnummer);
+        const canton = enrichedCantons.find(c => c.canton_number == d.properties.kantonsnummer);
 
         d3.select(event.target)
           .attr('stroke', '#1e1e1e')
           .raise();
-                
+
         tooltip.transition().duration(200).style("opacity", 0.9);
         tooltip.html(
           canton 
             ? `
               <h3>📍 ${canton.name.fr}</h3>
               <div class="general-data">
-                <p>Gares CFF : ${canton.stations[2024]}</p>
                 <p>Population : ${formatBigNumber(canton.population.years[2024])}</p>
+                <p>Collaborateur.ice.s : ${canton.employees_2024 !== null ? formatBigNumber(canton.employees_2024) : "n.d."}</p>
               </div>
-              <p>Gare/100k habitants : ${round2decimals(canton.stations[2024]/(canton.population.years[2024]/100000))}</p>
+              <p>Collaborateur.ice.s/1k habitant.e.s : ${canton.employeesPer1000 !== null ? round2decimals(canton.employeesPer1000) : "n.d."}</p>
             `
             : "Données indisponibles"
         )
-        .style("left", (event.offsetX + 10) + "px")
-        .style("top", (event.offsetY - 28) + "px");
+        .style("left", (event.pageX + 10) + "px")
+        .style("top", (event.pageY - 28) + "px");
       })
-
-      // Update tooltip position as the mouse moves
       .on("mousemove", (event) => {
-        tooltip.style("left", (event.offsetX + 10) + "px")
-              .style("top", (event.offsetY - 28) + "px")
-              .style("opacity", 1);
+        tooltip.style("left", (event.pageX + 10) + "px")
+          .style("top", (event.pageY - 28) + "px")
+          .style("opacity", 1);
       })
-
-      // Hide the tooltip when mouse leaves the canton
       .on("mouseout", (event, d) => {
         d3.select(event.target)
-          .attr('stroke', '#fafafa')
+          .attr('stroke', 'var(--clr-white-dark)');
 
         tooltip.transition().duration(500).style("opacity", 0);
       })
-    )
-}
+    );
+};
 
 /*
 * Create the map's caption
@@ -150,6 +195,7 @@ const updateCaption = () => {
   const legendWrapper = select(".legend-wrapper").node();
   const width = legendWrapper ? legendWrapper.getBoundingClientRect().width : 300;
   const height = 16;
+  const captionMaxLabel = d3.max(enrichedCantons, d => d.employeesPer1000 || 0) || 1;
 
   const svg = select(".legend-area svg");
   svg.selectAll("*").remove();
@@ -195,7 +241,7 @@ const updateCaption = () => {
 };
 
 const updateMapSize = () => {
-  const width = select(".railway-map .container").node().getBoundingClientRect().width * 0.95;
+  const width = select(".railway-map .wrapper").node().getBoundingClientRect().width * 0.85; // CORRECTION ICI
   const height = width * 0.65;
  
   mapSvg
@@ -216,27 +262,24 @@ const updateMapSize = () => {
 /*
 * Initialize and render the map once the component is fully loaded
 */
-onMounted(() => {
-  createMap()
-  // Délai pour s'assurer que le DOM est prêt
+onMounted(async () => {
+  enrichedCantons = await getMappedCantons();
+  createMap();
   setTimeout(() => {
-    createCaption()
+    createCaption();
   }, 100);
   window.addEventListener('resize', updateMapSize);
-})
+});
 
-/*
-* Remove the event listener when the page is unmounted
-*/
 onUnmounted(() => {
   window.removeEventListener('resize', updateMapSize);
-})
+});
 
 </script>
 
 <template>
   <section class="railway-map">
-    <div class="container">
+    <div class="wrapper">
       <h2>Les gares CFF en 2024</h2>
       <div class="chart-area"></div>
       <div class="visualization-info">
@@ -250,16 +293,20 @@ onUnmounted(() => {
 
 <style scoped>
 section {
-  background-color: var(--clr-primary-bg);
+  background-color: var(--clr-white-dark);
+  /* La section hérite déjà du CSS global, on ajoute juste l'alignement vertical */
+  align-items: center; /* Centre verticalement le contenu de la grille */
 }
 
-.container {
+.wrapper {
   height: max-content;
   grid-column: 3 / span 8;
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  position: relative;
+  padding: 2rem 0;
+  justify-self: center; /* Centre horizontalement dans sa colonne de grille */
+  width: 100%;
 }
 
 .visualization-info {
@@ -273,7 +320,7 @@ section {
   display: flex;
   flex-direction: row;
   gap: .5rem;
-  margin: auto;
+  margin: 0 auto;
   width: 60%;
   max-width: 400px;
   min-height: 40px;
@@ -284,4 +331,10 @@ section {
   font-weight: var(--txt-weight-display);
   width: 100%;
 }
+
+.chart-area {
+  width: 100%;
+  text-align: center;
+}
+
 </style>

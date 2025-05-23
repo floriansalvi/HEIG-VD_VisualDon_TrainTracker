@@ -51,7 +51,7 @@ const createMap = () =>  {
 
   // Define the map height and width
   // const width = select(".section-map .wrapper").node().getBoundingClientRect().width
-  const width = select(".section-map .wrapper").node().getBoundingClientRect().width*0.95
+  const width = select(".section-map .wrapper").node().getBoundingClientRect().width*0.85
   const height = width * 0.65
 
   // Define the map's color scale based on the datas
@@ -106,7 +106,7 @@ const createMap = () =>  {
     return colorScale(value);
   }
       })
-      .attr('stroke', '#fafafa')
+      .attr('stroke', 'var(--clr-white-dark)')
       .attr('stroke-width', 1.25)
 
       // Show the tooltip when mouse enters a canton
@@ -144,7 +144,7 @@ const createMap = () =>  {
       // Hide the tooltip when mouse leaves the canton
       .on("mouseout", (event, d) => {
         d3.select(event.target)
-          .attr('stroke', '#fafafa')
+          .attr('stroke', 'var(--clr-white-dark)')
 
         tooltip.transition().duration(500).style("opacity", 0);
       })
@@ -318,7 +318,8 @@ watch(showStationPopRatio, () => {
 
 <style scoped>
   section {
-    background-color: var(--clr-primary-bg);
+    background-color: var(--clr-white-dark);
+    align-items: center;
   }
 
   .wrapper {
@@ -418,6 +419,11 @@ watch(showStationPopRatio, () => {
 .caption-svg {
   font-family: var(--txt-font-txt);
   font-weight: var(--txt-weight-display);
+}
+
+.map-svg {
+  display: flex;
+  justify-content: center;
 }
 
 </style>

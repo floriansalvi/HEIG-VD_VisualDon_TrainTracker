@@ -14,22 +14,36 @@ import ThePlateform from '../components/ThePlateform.vue'
 import TheMostPlateform from '../components/TheMostPlatform.vue'
 import TheDelays from '../components/TheDelays.vue'
 import topStations from '../components/TopStation.vue'
+import TheTrain from '../components/bases/TheTrain.vue'
 </script>
 
 <template>
-  <TheHeader />
-  <TheBoard />
-  <TheDelays />
-  <TheIntro />
-  <TheMap />
-  <TheAttendance />
-  <TheMainStations />
-  <topStations />
-  <TheFrequentation />
-  <ThePlateform />
-  <TheMostPlateform />
-  <TheMostCrowded />
-  <TheEmployees />
+  <TheTrain class="train"></TheTrain>
+  <TheHeader class="index-top"/>
+  <TheBoard class="index-top"/>
+  <TheDelays class="index-top"/>
+  <TheIntro class="index-bottom"/>
+  <TheMap class="index-top"/>
+  <TheAttendance class="index-bottom"/>
+  <TheMainStations class="index-bottom"/>
+  <topStations class="index-top"/>
+  <TheFrequentation class="index-bottom"/>
+  <ThePlateform class="index-top"/>
+  <TheMostPlateform class="index-bottom"/>
+  <TheEmployees class="index-top"/>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+.index-bottom {
+  z-index: 1;
+}
+
+.index-top {
+  z-index: 1000;
+}
+
+.train {
+  position: absolute;
+}
+</style>
