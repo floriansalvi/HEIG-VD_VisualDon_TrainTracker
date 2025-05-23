@@ -28,7 +28,7 @@ onMounted(async () => {
 
   const maxBars = 10
   const barHeight = 50
-  const margin = { top: 60, right: 60, bottom: 60, left: 120 }
+  const margin = { top: 60, right: 60, bottom: 60, left: 150 }
   const width = containerWidth - margin.left - margin.right
   const height = maxBars * barHeight
 
