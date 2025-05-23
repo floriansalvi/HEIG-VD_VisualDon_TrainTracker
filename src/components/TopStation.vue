@@ -20,7 +20,6 @@
 </template>
 
 <script>
-import { loadStationShops } from '@/modules/api'
 import StationCard from '@/components/StationCard.vue'
 
 export default {
@@ -33,19 +32,9 @@ export default {
     }
   },
   async mounted() {
-    const [userData, shopData] = await Promise.all([
-      fetch(
-        'https://data.sbb.ch/api/v2/catalog/datasets/anzahl-sbb-bahnhofbenutzer/exports/json'
-      ).then((res) => res.json()),
-      loadStationShops(),
-    ])
-
-    const shopCountByStation = shopData.reduce((acc, item) => {
-      const name = item.stationsbezeichnung?.trim()
-      if (!name) return acc
-      acc[name] = (acc[name] || 0) + 1
-      return acc
-    }, {})
+    const userData = await fetch(
+      'https://data.sbb.ch/api/v2/catalog/datasets/anzahl-sbb-bahnhofbenutzer/exports/json'
+    ).then((res) => res.json())
 
     const filtered = userData.filter(
       (entry) =>
@@ -64,7 +53,6 @@ export default {
           year: 2024,
           daily,
           yearly: daily * 365,
-          shops: shopCountByStation[name] || '-',
         }
       }
     })
@@ -73,7 +61,6 @@ export default {
       .sort((a, b) => b.daily - a.daily)
       .slice(0, 5)
 
-    // Intercepter scroll vertical
     this.$nextTick(() => {
       const wrapper = this.$refs.sliderWrapper
       wrapper.addEventListener('wheel', this.interceptScroll, {
@@ -98,15 +85,12 @@ export default {
       }
     },
     interceptScroll(e) {
-      if (this.allowVerticalScroll) return // Laisser scroller vers le bas
+      if (this.allowVerticalScroll) return
 
       const wrapper = this.$refs.sliderWrapper
       if (!wrapper) return
 
-      // Empêcher le scroll vertical
       e.preventDefault()
-
-      // Appliquer le deltaY en scroll horizontal
       wrapper.scrollLeft += e.deltaY + 20
     },
   },

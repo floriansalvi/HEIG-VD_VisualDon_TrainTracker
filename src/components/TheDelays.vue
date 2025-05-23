@@ -8,7 +8,7 @@
       <div class="retard-text">
         <h2>Le saviez-vous ?</h2>
         <p>
-          🛋️ Hier, la gare de {{ nearestStation }} a enregistré {{ delayCount }}
+          ⌚️ Hier, la gare de {{ nearestStation }} a enregistré {{ delayCount }}
           retards par rapport aux horaires prévus !
         </p>
       </div>

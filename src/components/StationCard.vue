@@ -12,7 +12,6 @@
       <div class="right">
         <p>Par jour : {{ format(station.daily) }}</p>
         <p>Par année : {{ format(station.yearly) }}</p>
-        <p>Shops et services : {{ station.shops }}</p>
       </div>
     </div>
     <div class="card-bottom"></div>

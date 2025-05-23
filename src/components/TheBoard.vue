@@ -50,7 +50,7 @@ const getPosition = async () => {
 const fetchStationData = async (lat, long) => {
   try {
     // Requête pour trouver la station la plus proche
-    const transportURL = `http://transport.opendata.ch/v1/locations?x=${lat}&y=${long}&type=station`
+    const transportURL = `https://transport.opendata.ch/v1/locations?x=${lat}&y=${long}&type=station`
     const response = await fetch(transportURL)
     const transportData = await response.json()
 

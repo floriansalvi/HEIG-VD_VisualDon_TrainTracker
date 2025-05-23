@@ -15,6 +15,7 @@ import TheMostPlateform from '../components/TheMostPlatform.vue'
 import TheDelays from '../components/TheDelays.vue'
 import topStations from '../components/TopStation.vue'
 import TheTrain from '../components/bases/TheTrain.vue'
+import TheFooter from '../components/TheFooter.vue'
 </script>
 
 <template>
@@ -31,6 +32,7 @@ import TheTrain from '../components/bases/TheTrain.vue'
   <ThePlateform class="index-top" />
   <TheMostPlateform class="index-bottom" />
   <TheEmployees class="index-top" />
+  <TheFooter class="index-top"></TheFooter>
 </template>
 
 <style scoped>
