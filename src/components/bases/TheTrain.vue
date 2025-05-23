@@ -72,6 +72,8 @@
 
 .train-wrapper {
   grid-column: 2 / span 2; /* Commence à la colonne 2, occupe 2 colonnes */
+  display: flex;
+  justify-content: center;
 }
 
 .train-wrapper svg {

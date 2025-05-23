@@ -127,7 +127,7 @@ const createMap = () => {
     .style('border-radius', '0.5rem')
     .style('pointer-events', 'none')
     .style('box-shadow', '0 2px 10px rgba(0,0,0,0.1)')
-    .style('z-index', '1000')
+    .style('z-index', '9999')
 
   map
     .selectAll('path')

@@ -110,6 +110,7 @@ span {
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000; /* élevé par défaut */
+  pointer-events: none;
 }
 
 .train-wrapper {
