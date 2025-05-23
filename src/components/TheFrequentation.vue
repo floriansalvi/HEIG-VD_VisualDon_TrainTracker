@@ -91,17 +91,28 @@ onMounted(async () => {
     .attr('rx', 10)
     .attr('fill', (d) => color(d.value))
     .attr('stroke', 'white')
-    .on('mouseover', (event, d) => {
+    .on('mouseover', function (event, d) {
+      d3.select(this)
+        .attr('stroke', '#000')
+        .attr('stroke-width', 3)
+        .style('filter', 'drop-shadow(2px 2px 4px rgba(0,0,0,0.4))')
+        .raise() // met le carré au-dessus des autres
+
       tooltip.value.style.opacity = 1
       tooltip.value.innerHTML = `
-        <h3>📍 ${d.gare}</h3>
-        <p>Année : ${d.year}</p>
-        <p>Usagers : ${d3.format(',')(d.value)}</p>
-      `
+    <h3>📍 ${d.gare}</h3>
+    <p>Année : ${d.year}</p>
+    <p>Usagers : ${d3.format(',')(d.value)}</p>
+  `
       tooltip.value.style.left = `${event.pageX + 10}px`
       tooltip.value.style.top = `${event.pageY - 40}px`
     })
-    .on('mouseout', () => {
+    .on('mouseout', function () {
+      d3.select(this)
+        .attr('stroke', 'white')
+        .attr('stroke-width', 1)
+        .style('filter', 'none')
+
       tooltip.value.style.opacity = 0
     })
 
