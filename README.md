@@ -1,21 +1,39 @@
-# VisualDon - Projet - 2025
+# 🚂 TrainTracker
 
-HEIG-VD - Ingénierie des Médias - Visualisation de données - 2025 S1
+## Sommaire
+- [🏁 Introduction](#-introduction)
+- [🧾 Maquette](#maquette)
+- [📊 Jeux de données](#jeux-de-données)
+  - [Contexte](#contexte)
+  - [Description](#description)
+  - [But](#but)
+  - [Références](#références)
+- [🛠️ Technologies utilisées](#technologies-utilisées)
+- [💻 Installation](#-installation)
+  - [GIT](#git)
+  - [Front-end](#front-end)
+  - [Setup](#setup)
+- [🌐 Accès](#-accès)
+- [💁🏻‍♂️ Réalisation](#-réalisation)
 
-**Titre du projet**
-Fréquentation des gares CFF
+---
 
-**Membres**
-- Cristian Pottier
-- Florian Salvi
+## 🏁 Introduction
+
+**TrainTracker** est un site ayant pour but la mise en avant de certaines statistiques liées aux Chemin de fer fédéraux suisses. Il est constitué de différentes visualiation de données et a été réalisé durant les cours de VisualDon au cours du 4e semestre d'Ingénierie des Médias à la Haute École d'Ingénierie et de Gestion du canton de Vaud.
+
+---
+
+## Maquette
+[Maquette Figma](https://www.figma.com/design/N6wiZn5oJkOCLBWRyYposF/VisualDon?node-id=0-1&t=MAPyvtgjGijL998Q-1)
+
+---
 
 ## Jeux de données
 [Nombre d’usagers de la gare CFF](https://opendata.swiss/fr/dataset/anzahl-sbb-bahnhofbenutzer)\
 [Collaboratrices et collaborateurs des CFF par canton de travail](https://opendata.swiss/fr/dataset/sbb-mitarbeitende-nach-arbeitskanton)\
 [Halte: services accessoires](https://opendata.swiss/fr/dataset/haltestelle-nebenbetriebe)\
 [Demographic balance by canton](https://www.pxweb.bfs.admin.ch/pxweb/en/px-x-0102020000_101/px-x-0102020000_101/px-x-0102020000_101.px/table/tableViewLayout2/)
-
-## Introduction
 
 ### Contexte
 Les données proviennent majoritairement de opendata.swiss. Les 3 premiers jeux de données ont été publiés par les Chemins de Fer Fédéraux Suisses CFF. Le dernier jeu de données est, quant à lui, édité par l'Office Fédéral de la Statistique.
@@ -30,9 +48,6 @@ Ces objets possèdent 3 attributs : Le nom de la gare ; l'année ; le nombre de 
 **Collaboratrices et collaborateurs des CFF par canton de travail**
 Un objet par canton. Chaque année de 2013 à 2024 est représentée par un attribut qui indique le nombre de collaborateur.ice.s. Un attribut spécifie le canton, un l'unité de mesure (FTE -> Equivalent temps plein) et un attribut pour les remarques.
 
-**Halte: services accessoires**
-Ce jeu de données répertorie les commerces et services des gare CFF. Ils sont tous représentés par un objet qui contient plusieurs attributs. Les plus importants sont : nom de la gare ; nom du commerce/service ; contact ; coordonnées de la gare ; code postal.
-
 **Demographic balance by canton**
 Ce jeu de donnée mis à disposition par l'OFS ne peut pas être téléchargé. Il est accessible grâce à une API.
 L'URL de l'API est généré après avoir rempli un form sur le site. Les données peuvent être filtrées en fonction de plusieurs attributs tels que le.s canton.s choisi.s ; le genre ; la nationalité (suisse ou étrangère) ; l'année ; …
@@ -46,5 +61,74 @@ Nous pensons que les données provenant des Chemin de Fer Fédéraux Suisses son
 
 Les données démographiques de l'OFS peuvent être utilisées dans un large pannel de domaines : l'étude démogrpahique ; le domaine social ; les transports ; la recherche scientifique ; etc …
 
-## Maquette
-[Maquette Figma](https://www.figma.com/design/N6wiZn5oJkOCLBWRyYposF/VisualDon?node-id=0-1&t=MAPyvtgjGijL998Q-1)
+---
+
+### Technologies utilisées
+
+- **Framework**
+    - Vue.js
+- **Composants**
+    - D3
+    - D3 Brush
+    - D3 Geo
+    - D3 Scale
+    - D3 Transition
+- **Routes**
+    - La navigation se fait avec `Vue-router`
+    - S'agissant du site d'une page, seule une route est disponible (et Erreur 404).
+- **Design**
+    - `CSS`
+    - Non responsive
+
+---
+
+## 💻 Installation
+
+
+### GIT
+
+1. Cloner le répértoire GIT
+
+```bash
+git clone https://github.com/floriansalvi/HEIG-VD_VisualDon_TrainTracker.git
+```
+
+### Front-end
+
+1. Installer les dépendances
+
+```bash
+npm install
+```
+
+2. Démarrer le serveur front-end
+
+```bash
+npm run dev
+```
+
+### Setup
+
+Si tu ne veux pas devoir exécuter ces commandes manuellement, `setup.sh` te permettre d'effectuer toutes ces étapes en 2 commandes.
+
+```bash
+chmod +x setup.sh
+./setup.sh
+```
+
+---
+
+## 🌐 Accès
+
+URL : [http://localhost:5173](http://localhost:5173)
+
+---
+
+## 💁🏻‍♂️ Réalisation
+
+**Cristian Pottier** 
+**Florian Salvi**  
+Haute École de Gestion et d'Ingénierie du Canton de Vaud  
+Ingénierie des Médias  
+Semestre S4 - 2025  
+Classe M52-2
